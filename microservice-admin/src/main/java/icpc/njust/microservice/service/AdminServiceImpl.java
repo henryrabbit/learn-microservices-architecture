@@ -12,7 +12,7 @@ public class AdminServiceImpl implements AdminService {
     private AdminDao adminDao;
 
     @Override
-    public Admin get(String uername) {
-        return adminDao.findOne(uername);
+    public Boolean logincheck(String uername, String password) {
+        return password.equals(adminDao.findOne(uername).getPassword());
     }
 }

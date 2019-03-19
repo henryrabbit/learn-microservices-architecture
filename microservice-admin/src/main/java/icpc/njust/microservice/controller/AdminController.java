@@ -16,8 +16,9 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @RequestMapping(value="/{username}", method = RequestMethod.GET)
-    public Admin getadmin(@PathVariable(name="username") String username){
-        return adminService.get(username);
+    @RequestMapping(value="/login/{username}/{password}", method = RequestMethod.POST)
+    public Boolean getadmin(  @PathVariable(name="username") String username,
+                            @PathVariable(name="password") String password){
+        return adminService.logincheck(username, password);
     }
 }

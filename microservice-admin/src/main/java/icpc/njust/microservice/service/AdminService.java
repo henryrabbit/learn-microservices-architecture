@@ -6,5 +6,5 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 public interface AdminService {
-    Admin get(String uername);
+    Boolean logincheck(String uername, String password);
 }
