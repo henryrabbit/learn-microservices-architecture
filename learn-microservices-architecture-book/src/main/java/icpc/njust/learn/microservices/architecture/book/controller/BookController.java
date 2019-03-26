@@ -17,7 +17,7 @@ public class BookController {
     private BookService bookService;
 
     @RequestMapping(value="/id/{id}", method = RequestMethod.GET)
-    public Book getadmin(@PathVariable(name="id") String id){
+    public String getbyid(@PathVariable(name="id") String id){
         Book book = bookService.findbyid(id);
         return book;
     }

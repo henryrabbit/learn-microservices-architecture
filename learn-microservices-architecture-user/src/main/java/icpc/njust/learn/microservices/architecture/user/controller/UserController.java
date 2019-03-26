@@ -20,7 +20,7 @@ public class UserController {
         return userService.login(username,password);
     }
 
-    @RequestMapping(value="/register/{username}/{password}/{phonenumber}", method = RequestMethod.GET)
+    @RequestMapping(value="/register/{username}/{password}/{phonenumber}", method = RequestMethod.POST)
     public String register( @PathVariable(name="username") String username,
                             @PathVariable(name="password") String password,
                             @PathVariable(name="phonenumber") String phonenumber){
