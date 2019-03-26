@@ -2,7 +2,6 @@ package icpc.njust.learn.microservices.architecture.webui.service;
 
 import icpc.njust.learn.microservices.architecture.webui.pojo.Book;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,11 +16,11 @@ public interface BookService {
     public Book getbyid(@PathVariable(name="id") String id);
 
     @RequestMapping(value="/all/{pagenumber}/{pagesize}", method = RequestMethod.GET)
-    public Page<Book> getadmin(@PathVariable(name="pagenumber") int pagenumber,
+    public Object getadmin(@PathVariable(name="pagenumber") int pagenumber,
                                @PathVariable(name="pagesize") int pagesize );
 
     @RequestMapping(value = "/find/{book}/{pagenumber}/{pagesize}", method = RequestMethod.GET)
-    public Page<Book> find( @PathVariable(name = "book") Book book,
+    public Object find( @PathVariable(name = "book") Book book,
                             @PathVariable(name="pagenumber") int pagenumber,
                             @PathVariable(name="pagesize") int pagesize );
 

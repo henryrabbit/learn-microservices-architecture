@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>图书管理系统</title>
+    <meta name="description" content="图书管理系统">
+    <link href="css/drop-down.css" rel="stylesheet" type="text/css"/>
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+</head>
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/select-widget-min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){		
+	$(".ui-select").selectWidget({
+		change: function (changes) {
+			return changes;
+		},
+		effect: "slide",
+		keyControl: true,
+		speed: 200,
+		scrollHeight: 250
+	});
+});		
+//底部
+$(document).ready(function(){
+    if(document.documentElement.clientHeight > document.documentElement.offsetHeight){    
+		$(".nyh_footer").css({"position":"fixed","bottom":0});
+	}
+});
+$(document).ready(function(){
+	$(".select_city").hide();
+	$(".jq").click(function(){
+		$(".top_bg").hide();
+		$(".select_city").fadeToggle();
+	});
+});
+</script>
+<body>
+<div class="header">
+    <a href="userLogin.html" style="position:absolute;left:1200px">登录</a>
+    <a href="userRegister.html" style="position:absolute;left:1250px">注册</a>
+    <a href="managerlogin.html" style="position:absolute;left:1300px">管理员登录</a>
+
+
+
+     <div class="nayouhuo_logo"></div>
+    <div class="search">
+    	<form action="" method="get">
+        	<div class="search_input">
+                <input name="url" type="text"  class="search_url" placeholder="请输入图书信息进行查询"/>
+                <input name="" type="submit" class="search_submit" value="查询" />
+
+            </div>
+
+        </form>
+    </div>
+</div>
+<div class="show_content" id="show">
+	<div class="location"><span>南京理工大学</span><h1>查询图书结果如下</h1></div>
+    <div class="show_list">
+    	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td height="40" align="center" valign="middle" class="title_bg">id</td>
+            <td height="40" align="center" valign="middle" class="title_bg">ISBN</td>
+            <td height="40" align="center" valign="middle" class="title_bg">版次</td>
+            <td height="40" align="center" valign="middle" class="title_bg">开本</td>
+            <td height="40" align="center" valign="middle" class="title_bg">出版时间</td>
+            <td height="40" align="center" valign="middle" class="title_bg">字数</td>
+            <td height="40" align="center" valign="middle" class="title_bg">语言</td>
+            <td height="40" align="center" valign="middle" class="title_bg">本数</td>
+          </tr>
+          <tr>
+            <td height="40" align="center">1111</td>
+            <td height="40" align="center"><a href="#" target="_blank"><img src="http://img11.360buyimg.com/n1/jfs/t1468/245/172025425/159479/c25528c/557ec99aN8591c53c.jpg" width="50" height="50" border="0" /></a></td>
+            <td height="40" align="center">第一版</td>
+            <td height="40" align="center">啥</td>
+            <td height="40" align="center" >2019.9</td>
+            <td height="40" align="center" >5万</td>
+            <td height="40" align="center">中文</td>
+            <td height="40" align="center"><a href="#" target="_blank">啥</a></td>
+          </tr>
+          <tr>
+            <td height="40" align="center">京东商城</td>
+            <td height="40" align="center"><a href="#" target="_blank"><img src="http://img11.360buyimg.com/n1/jfs/t1468/245/172025425/159479/c25528c/557ec99aN8591c53c.jpg" width="50" height="50" border="0" /></a></td>
+            <td height="40" align="center">15.00</td>
+            <td height="40" align="center">6.00</td>
+            <td height="40" align="center" class="chengse">上海</td>
+            <td height="40" align="center" class="luse">现货</td>
+            <td height="40" align="center" class="chengse">5</td>
+            <td height="40" align="center"><a href="#" target="_blank">去看看</a></td>
+          </tr>
+        </table>
+    </div>
+</div>
+<div class="nyh_footer">
+	<div class="nyh_footer_nav">
+    	<a href="http://www.baidu.com" target="_blank">关于我们</a>
+    </div>
+
+</body>
+</html>
