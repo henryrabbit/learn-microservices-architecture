@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
     <title></title>
-    <link rel="stylesheet" href="css/pintuer.css">
-    <link rel="stylesheet" href="css/admin.css">
-    <script src="js/jquery.js"></script>
-    <script src="js/pintuer.js"></script>
+    <link rel="stylesheet" href="css/pintuer.css" th:href="@{/static/css/pintuer.css}">
+    <link rel="stylesheet" href="css/admin.css" th:href="@{/static/css/admin.css}">
+    <script src="js/jquery.js" th:src="@{/static/js/jquery.js}"></script>
+    <script src="js/pintuer.js" th:src="@{/static/js/pintuer.js}"></script>
 </head>
 <body>
 <div class="panel admin-panel">
@@ -96,8 +97,9 @@
                 <button class="button bg-main icon-check-square-o" type="submit">保存</button>
                 <button class="button bg-main icon-check-square-o" type="reset"> 取消</button>
             </div>
+        </form>
     </div>
-    </form>
+
 </div>
 </div>
 

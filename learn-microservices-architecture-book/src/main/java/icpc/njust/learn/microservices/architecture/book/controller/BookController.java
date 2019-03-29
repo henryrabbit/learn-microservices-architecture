@@ -25,9 +25,17 @@ public class BookController {
     }
 
     @RequestMapping(value="/all/{pagenumber}/{pagesize}", method = RequestMethod.GET)
-    public Page<Book> getadmin(@PathVariable(name="pagenumber") int pagenumber,
+    public Page<Book> findall(@PathVariable(name="pagenumber") int pagenumber,
                                @PathVariable(name="pagesize") int pagesize ){
         return bookService.findall(pagenumber,pagesize);
+    }
+
+    @RequestMapping(value = "/findbyname/{bookname}", method = RequestMethod.GET)
+    public Page<Book> findbyname(@PathVariable(name = "bookname") String bookname){
+        System.out.println(bookname);
+        Book book = new Book();
+        book.setBookname(bookname);
+        return bookService.findbook(book,0,1000);
     }
 
     @RequestMapping(value = "/find/{book}/{pagenumber}/{pagesize}", method = RequestMethod.GET)

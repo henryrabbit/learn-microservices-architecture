@@ -1,12 +1,16 @@
 spring:
   application:
     name: learn-microservices-architecture-webui
+  mvc:
+    static-path-pattern: /static/**
   thymeleaf:
     cache: false
     mode: LEGACYHTML5
     encoding: UTF-8
     servlet:
       content-type: text/html
+    prefix: classpath:/templates/
+    surfix: .html
 
 server:
   port: 8080

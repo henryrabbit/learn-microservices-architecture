@@ -43,6 +43,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Page<Book> findbook(Book book, int pageNumber, int pageSize) {
+        System.out.println(book.getBookname());
         Pageable pageable=PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "id");
         Specification<Book> spec = new Specification<Book>() {        //查询条件构造
         @Override
@@ -70,8 +71,9 @@ public class BookServiceImpl implements BookService {
 }
 
     @Override
-    public Page<Book> findall(int pagenumber, int pagesize) {
-        return findall(pagenumber, pagesize);
+    public Page<Book> findall(int pageNumber, int pageSize) {
+        Pageable pageable=PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "id");
+        return bookDao.findAll(pageable);
     }
 
     @Override

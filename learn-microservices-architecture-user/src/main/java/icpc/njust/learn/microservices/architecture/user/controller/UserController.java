@@ -24,6 +24,7 @@ public class UserController {
     public String register( @PathVariable(name="username") String username,
                             @PathVariable(name="password") String password,
                             @PathVariable(name="phonenumber") String phonenumber){
+        System.out.println("register!");
         return userService.register(username,password,phonenumber);
     }
 }

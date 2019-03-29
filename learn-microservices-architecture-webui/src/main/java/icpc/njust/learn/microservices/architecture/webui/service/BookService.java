@@ -16,8 +16,11 @@ public interface BookService {
     public Book getbyid(@PathVariable(name="id") String id);
 
     @RequestMapping(value="/all/{pagenumber}/{pagesize}", method = RequestMethod.GET)
-    public Object getadmin(@PathVariable(name="pagenumber") int pagenumber,
-                               @PathVariable(name="pagesize") int pagesize );
+    public Object findall(@PathVariable(name="pagenumber") int pagenumber,
+                              @PathVariable(name="pagesize") int pagesize );
+
+    @RequestMapping(value = "/findbyname/{bookname}", method = RequestMethod.GET)
+    public Object findbyname(@PathVariable(name = "bookname") String bookname);
 
     @RequestMapping(value = "/find/{book}/{pagenumber}/{pagesize}", method = RequestMethod.GET)
     public Object find( @PathVariable(name = "book") Book book,
