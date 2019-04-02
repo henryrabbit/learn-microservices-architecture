@@ -3,8 +3,8 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" th:href="@{/static/http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css}">
-    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js" th:src="@{/static/http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js}"></script>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -20,8 +20,8 @@
 <div class="panel admin-panel">
     <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>添加图书</strong></div>
     <div class="body-content">
-        <form method="post" class="form-x" action="">
-            <div  style="padding-left:20px ;padding-bottom: 20px;">
+        <form data-parsley-validate="true" class="form-x" th:action="@{/th/book/add}" th:object="${book}" th:method="post">
+            <div style="padding-left:20px ;padding-bottom: 20px;">
                 <label>【基本信息】</label>
             </div>
             <div class="form-group">
@@ -29,7 +29,7 @@
                     <label>著作名称(id)：</label>
                 </div>
                 <div class="field l10" >
-                    <input type="text" class="input w100" value="" name="title" data-validate="required:请输入著作名称" />
+                    <input type="text" class="input w100" value="" name="title" data-validate="required:请输入著作名称"th:field="*{bookname}" />
                     <div class="tips"></div>
                 </div>
             </div>
@@ -38,19 +38,19 @@
                     <label>ISBN：</label>
                 </div>
                 <div class="field l10">
-                    <input type="text" class="input w50" value="" name="title" data-validate="required:请输入ISBN" />
+                    <input type="text" class="input w50" value="" name="title" data-validate="required:请输入ISBN" th:field="*{isbn}"/>
                     <div class="tips"></div>
                 </div>
             </div>
             <ul class="list-inline"  style="padding-left: 40px;  padding-bottom: 25px;">
                 <li>版次:</li>
                 <li style="padding-right: 200px;"><div class="field" >
-                    <input type="text" class="input" name="s_title" value="" data-validate="required:请输入版次" />
+                    <input type="text" class="input" name="s_title" value="" data-validate="required:请输入版次"th:field="*{edition}" />
                 </div>
                 </li>
                 <li>字数:</li>
                 <li style="padding-right: 200px;"><div class="field" >
-                    <input type="text" class="input" name="s_title" value="" data-validate="required:请输入字数" />
+                    <input type="text" class="input" name="s_title" value="" data-validate="required:请输入字数" th:field="*{wordcount}"/>
                 </div>
                 </li>
 
@@ -59,12 +59,12 @@
             <ul class="list-inline"  style="padding-left: 40px;  padding-bottom: 25px;">
                 <li>开本:</li>
                 <li style="padding-right: 200px;"><div class="field" >
-                    <input type="text" class="input" name="s_title" value="" data-validate="required:请输入开本" />
+                    <input type="text" class="input" name="s_title" value="" data-validate="required:请输入开本" th:field="*{booksize}"/>
                 </div>
                 </li>
                 <li>语言:</li>
                 <li style="padding-right: 200px;"><div class="field" >
-                    <input type="text" class="input" name="s_title" value="" data-validate="required:请输入语言" />
+                    <input type="text" class="input" name="s_title" value="" data-validate="required:请输入语言" th:field="*{language}"/>
                 </div>
                 </li>
 
@@ -72,13 +72,13 @@
             <ul class="list-inline"  style="padding-left: 40px;  padding-bottom: 25px;">
                 <li>出版时间:</li>
                 <li style="padding-right: 200px;"><div class="field" >
-                    <input type="text" class="input" name="s_title" value="" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" value=""  data-validate="required:日期不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
+                    <input type="text" class="input" name="s_title" value=""  data-validate="required:日期不能为空" th:field="*{publicationtime}" />
                 </div>
                 </li>
                 <li>本数：</li>
                 <li  style="padding-left:36px;">
                     <div class="field">
-                        <input type="text" class="input" name="s_title" value="" data-validate="required:请输入本数"/>
+                        <input type="text" class="input" name="s_title" value="" data-validate="required:请输入本数"th:field="*{number}"/>
                     </div>
                 </li>
             </ul>

@@ -8,14 +8,8 @@ import icpc.njust.learn.microservices.architecture.webui.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/th")
@@ -34,14 +28,14 @@ public class WebuiController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/managerLogin", method = RequestMethod.GET)
+    @RequestMapping(value = "/managerlogin", method = RequestMethod.GET)
     public ModelAndView managerLogin(ModelAndView modelAndView){
         User user = new User();
         user.setUsername("");
         user.setPassword("");
         modelAndView.addObject(user);
-        modelAndView.setViewName("managerlogin");
-        return modelAndView;
+       modelAndView.setViewName("managerlogin");
+       return modelAndView;
     }
 
     @RequestMapping(value = "/userLogin", method = RequestMethod.GET)
@@ -92,6 +86,26 @@ public class WebuiController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/addbook", method = RequestMethod.GET)
+    public ModelAndView addbook(ModelAndView modelAndView){
+        Book book = new Book();
+       // book.setAuthor("");
+        book.setNumber(0);//
+        book.setPublicationtime("");//
+        book.setIsbn("");//
+        //book.setLent(0);
+        book.setLanguage("");//
+        book.setEdition("");//
+       // book.setId("");
+        book.setBooksize("");//
+        //book.setPublish("");
+        book.setWordcount("");//
+        book.setBookname("");//
+        modelAndView.setViewName("addbook");
+        modelAndView.addObject(book);
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     public ModelAndView userlogin(User user, ModelAndView modelAndView){
         if(user==null || user.getPassword()==null || user.getPassword().equals("") || user.getUsername()==null || user.getUsername().equals("")){
@@ -126,6 +140,7 @@ public class WebuiController {
         System.out.println(s);
         if(s.equals("success")){
             modelAndView.addObject("username",user.getUsername());
+            modelAndView.addObject("bookpage",bookService.findall(0,1000));
             modelAndView.setViewName("deletebook");
         }
         else{
@@ -138,9 +153,62 @@ public class WebuiController {
     @RequestMapping(value = "/book/find", method = RequestMethod.GET)
     public ModelAndView bookfind(User user, ModelAndView modelAndView){
         System.out.println(user.getPassword()+user.getUsername());
-        modelAndView.addObject("bookpage",bookService.findbyname(user.getPassword()));
+        if(user.getPassword()==null ||user.getPassword().equals(""))
+            modelAndView.addObject("bookpage",bookService.findall(0,1000));
+        else
+            modelAndView.addObject("bookpage",bookService.findbyname(user.getPassword()));
         modelAndView.addObject("username",user.getUsername());
         modelAndView.setViewName("index");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/book/add", method = RequestMethod.POST)
+    public ModelAndView bookadd(Book book,ModelAndView modelAndView) {
+        boolean s = bookService.addbook(book.getBookname(),
+                book.getIsbn(),book.getEdition(),book.getBooksize(),book.getPublicationtime(),
+                book.getWordcount(),book.getLanguage(),book.getNumber(),
+                book.getLent());
+        if (s == true) {
+           // modelAndView.addObject("bookname", book.getBookname());
+
+            modelAndView.addObject("bookpage",bookService.findall(0,1000));
+            modelAndView.setViewName("deletebook");
+        } else {
+            //modelAndView.addObject("error", "添加失败");
+            modelAndView.setViewName("addbook");
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/deletebook/{id}", method = RequestMethod.GET)
+    public ModelAndView deletebook(@PathVariable(name="id") String id, ModelAndView modelAndView){
+        Boolean s = bookService.deletebyid(id);
+        if(s){
+            modelAndView.addObject("bookpage",bookService.findall(0,1000));
+            modelAndView.addObject("msg","删除成功");
+            modelAndView.setViewName("deletebook");
+        }
+        else{
+            modelAndView.addObject("bookpage",bookService.findall(0,1000));
+            modelAndView.addObject("msg","删除失败");
+            modelAndView.setViewName("deletebook");
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/editbook/{id}", method = RequestMethod.GET)
+    public ModelAndView editbook(@PathVariable(name="id") String id, ModelAndView modelAndView){
+        Boolean s = bookService.deletebyid(id);
+        if(s){
+            modelAndView.addObject("bookpage",bookService.findall(0,1000));
+            modelAndView.addObject("msg","删除成功");
+            modelAndView.setViewName("deletebook");
+        }
+        else{
+            modelAndView.addObject("bookpage",bookService.findall(0,1000));
+            modelAndView.addObject("msg","删除失败");
+            modelAndView.setViewName("deletebook");
+        }
         return modelAndView;
     }
 }

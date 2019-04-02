@@ -44,7 +44,7 @@
 
             <a href="userLogin.html" th:if="${username}==null" th:href="@{/th/userLogin}" style="position:absolute;left:1200px">登录</a>
             <a href="userRegister.html" th:if="${username}==null" th:href="@{/th/userRegister}" style="position:absolute;left:1250px">注册</a>
-            <a href="managerlogin.html" th:if="${username}==null" th:href="@{/th/managerLogin}" style="position:absolute;left:1300px">管理员登录</a>
+            <a href="managerlogin.html" th:if="${username}==null" th:href="@{/th/managerlogin}" style="position:absolute;left:1300px">管理员登录</a>
 
             <p th:if="${username}!=null" th:text="'欢迎登录，'+ ${username}" style="position:absolute;left:1200px"></p>
 
@@ -57,6 +57,7 @@
                         <input name="" type="submit" class="search_submit" value="查询" />
                     </div>
                 </form>
+
             </div>
         </div>
 
@@ -69,7 +70,7 @@
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" th:if="${username}!=null and ${bookpage}!=null">
 
                   <tr>
-                    <td height="40" align="center" valign="middle" class="title_bg">id</td>
+                    <td height="40" align="center" valign="middle" class="title_bg">书名</td>
                     <td height="40" align="center" valign="middle" class="title_bg">ISBN</td>
                     <td height="40" align="center" valign="middle" class="title_bg">版次</td>
                     <td height="40" align="center" valign="middle" class="title_bg">开本</td>
@@ -79,7 +80,7 @@
                     <td height="40" align="center" valign="middle" class="title_bg">本数</td>
                   </tr>
                   <tr th:each="book:${bookpage.content}">
-                      <td height="40" align="center" th:text="${book.id}"></td>
+                      <td height="40" align="center" th:text="${book.bookname}"></td>
                       <td height="40" align="center" th:text="${book.isbn}"></td>
                       <td height="40" align="center" th:text="${book.edition}"></td>
                       <td height="40" align="center" th:text="${book.booksize}"></td>
@@ -94,7 +95,7 @@
         </div>
         <div class="nyh_footer">
             <div class="nyh_footer_nav">
-                <a href="http://www.baidu.com" target="_blank">关于我们</a>
+                <a href="http://jwc.njust.edu.cn/" target="_blank">关于我们</a>
             </div>
         </div>
     </body>

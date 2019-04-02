@@ -27,8 +27,17 @@ public interface BookService {
                             @PathVariable(name="pagenumber") int pagenumber,
                             @PathVariable(name="pagesize") int pagesize );
 
-    @RequestMapping(value="/add/{book}", method = RequestMethod.POST)
-    public boolean addbook(@PathVariable(name="book") Book book);
+    @RequestMapping(value="/add/{bookname}/{isbn}/{edition}/{booksize}/{publicationtime}/{wordcount}/{language}/{number}/{lent}", method = RequestMethod.POST)
+    public boolean addbook(
+            @PathVariable(name="bookname") String bookname,
+            @PathVariable(name="isbn")String isbn,
+            @PathVariable(name="edition") String edition,
+            @PathVariable(name="booksize")String booksize,
+            @PathVariable(name="publicationtime") String publicationtime,
+            @PathVariable(name="wordcount")String wordcount,
+            @PathVariable(name="language")String language,
+            @PathVariable(name="number")int number,
+            @PathVariable(name="lent")int lent);
 
     @RequestMapping(value = "/deletebyid/{id}", method = RequestMethod.POST)
     public boolean deletebyid(@PathVariable(name="id") String id);

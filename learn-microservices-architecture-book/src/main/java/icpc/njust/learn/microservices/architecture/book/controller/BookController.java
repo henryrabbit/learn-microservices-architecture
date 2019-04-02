@@ -45,8 +45,28 @@ public class BookController {
         return bookService.findbook(book, pagenumber, pagesize);
     }
 
-    @RequestMapping(value="/add/{book}", method = RequestMethod.POST)
-    public boolean addbook(@PathVariable(name="book") Book book){
+    @RequestMapping(value="/add/{bookname}/{isbn}/{edition}/{booksize}/{publicationtime}/{wordcount}/{language}/{number}/{lent}", method = RequestMethod.POST)
+    public boolean addbook(
+                           @PathVariable(name="bookname") String bookname,
+                           @PathVariable(name="isbn")String isbn,
+                           @PathVariable(name="edition") String edition,
+                           @PathVariable(name="booksize")String booksize,
+                           @PathVariable(name="publicationtime") String publicationtime,
+                           @PathVariable(name="wordcount")String wordcount,
+                           @PathVariable(name="language")String language,
+                           @PathVariable(name="number")int number,
+                           @PathVariable(name="lent")int lent){
+        Book book=new Book();
+        book.setBookname(bookname);
+        book.setIsbn(isbn);
+        book.setPublicationtime(publicationtime);
+        book.setEdition(edition);
+        book.setBooksize(booksize);
+        book.setWordcount(wordcount);
+        book.setLanguage(language);
+        book.setNumber(number);
+        book.setLent(lent);
+        System.out.print("hehe");
         bookService.createbook(book);
         return true;
     }

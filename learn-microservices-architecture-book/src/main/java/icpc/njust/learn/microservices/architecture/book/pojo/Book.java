@@ -1,12 +1,12 @@
 package icpc.njust.learn.microservices.architecture.book.pojo;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 public class Book {
     private String id;
     private String bookname;
@@ -41,6 +41,7 @@ public class Book {
 
 
     @Id
+    @GeneratedValue(generator = "jpa-uuid")
     @Column(name = "id")
     public String getId() {
         return id;

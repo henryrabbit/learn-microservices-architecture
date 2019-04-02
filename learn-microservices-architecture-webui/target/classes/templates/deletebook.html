@@ -18,8 +18,7 @@
         <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong> <a href="" style="float:right; display:none;">添加字段</a></div>
         <table class="table table-hover text-center">
             <tr>
-                <th style="text-align:left; padding-left:20px;" width="90px">选中</th>
-                <th>id</th>
+                <th>书名</th>
                 <th>ISBN</th>
                 <th>版次</th>
                 <th>开本</th>
@@ -29,40 +28,23 @@
                 <th>本数</th>
             </tr>
 
-            <volist name="list" id="vo">
-                <tr>
-                    <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-                        1</td>
-                    <td >钢铁是怎样炼成的</td>
-                    <td>isbn</td>
-                    <td>版次</td>
-                    <td>开本</td>
-                    <td>出版时间</td>
-                    <td>字数</td>
-                    <td>语言</td>
-                    <td>本数</td>
-                    <td><div class="button-group"> <a class="button border-main" style="padding:2px 8px;" href="editPosition.html"><span class="icon-edit"></span> 修改</a>
-                        <a class="button border-red" href="javascript:void(0)" style="padding:2px 8px;" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
-                </tr>
-                <tr>
-                    <td style="text-align:left; padding-left:20px;"><input type="checkbox" name="id[]" value="" />
-                        2</td>
-                    <td>sb四怎样炼成的</td>
-                    <td>isbn</td>
-                    <td>版次</td>
-                    <td>开本</td>
-                    <td>出版时间</td>
-                    <td>字数</td>
-                    <td>语言</td>
-                    <td>本数</td>
-                    <td><div class="button-group"> <a class="button border-main" style="padding:2px 8px;" href="editPosition.html"><span class="icon-edit"></span> 修改</a>
-                        <a class="button border-red" href="javascript:void(0)" style="padding:2px 8px;" onclick="return del(1,1,1)"><span class="icon-trash-o"></span> 删除</a> </div></td>
+                <tr th:each="book:${bookpage.content}">
+                    <td th:text="${book.bookname}"></td>
+                    <td th:text="${book.isbn}"></td>
+                    <td th:text="${book.edition}"></td>
+                    <td th:text="${book.booksize}"></td>
+                    <td th:text="${book.publicationtime}"></td>
+                    <td th:text="${book.wordcount}"></td>
+                    <td th:text="${book.language}"></td>
+                    <td th:text="${book.number}"></td>
+                    <td>
+                    <div class="button-group"> <a class="button border-main" style="padding:2px 8px;" th:href="@{'/th/editbook/{'+${book.id}+'}'}"><span class="icon-edit"></span> 修改</a>
+                        <a class="button border-red" style="padding:2px 8px;"  th:href="@{'/th/deletebook/{'+${book.id}+'}'}"><span class="icon-trash-o"></span> 删除</a>
+                    </div>
+                    </td>
                 </tr>
 
-                <td style="text-align:left; padding:19px 20px;"><input type="checkbox" id="checkall"/>
-                    全选 </td>
-                <td style="text-align:left;"><a class="button border-main" href="../../../../../../../QQ/文件/addbook.html" style="padding:5px 8px;">+&nbsp;新增</a>
-                    <a class="button border-red" href="javascript:void(0)" style="padding:5px 8px;" onclick="return del(1,1,1)"><span class="icon-trash-o"></span>批量删除</a></td>
+                <td style="text-align:left;"><a class="button border-main" href="addbook.html" th:href="@{/th/addbook}"style="padding:5px 8px;">+&nbsp;新增</a>
                 </td>
                 </tr>
                 <tr>
@@ -73,178 +55,5 @@
     </div>
     </div>
 </form>
-<script type="text/javascript">
-
-    //搜索
-    function changesearch(){
-
-    }
-
-    //单个删除
-    function del(id,mid,iscid){
-        if(confirm("您确定要删除吗?")){
-
-        }
-    }
-
-    //全选
-    $("#checkall").click(function(){
-        $("input[name='id[]']").each(function(){
-            if (this.checked) {
-                this.checked = false;
-            }
-            else {
-                this.checked = true;
-            }
-        });
-    })
-
-    //批量删除
-    function DelSelect(){
-        var Checkbox=false;
-        $("input[name='id[]']").each(function(){
-            if (this.checked==true) {
-                Checkbox=true;
-            }
-        });
-        if (Checkbox){
-            var t=confirm("您确认要删除选中的内容吗？");
-            if (t==false) return false;
-            $("#listform").submit();
-        }
-        else{
-            alert("请选择您要删除的内容!");
-            return false;
-        }
-    }
-
-    ////批量排序
-    //function sorts(){
-    //	var Checkbox=false;
-    //	 $("input[name='id[]']").each(function(){
-    //	  if (this.checked==true) {
-    //		Checkbox=true;
-    //	  }
-    //	});
-    //	if (Checkbox){
-    //
-    //		$("#listform").submit();
-    //	}
-    //	else{
-    //		alert("请选择要操作的内容!");
-    //		return false;
-    //	}
-    //}
-    //
-    //
-    ////批量首页显示
-    //function changeishome(o){
-    //	var Checkbox=false;
-    //	 $("input[name='id[]']").each(function(){
-    //	  if (this.checked==true) {
-    //		Checkbox=true;
-    //	  }
-    //	});
-    //	if (Checkbox){
-    //
-    //		$("#listform").submit();
-    //	}
-    //	else{
-    //		alert("请选择要操作的内容!");
-    //
-    //		return false;
-    //	}
-    //}
-    //
-    ////批量推荐
-    //function changeisvouch(o){
-    //	var Checkbox=false;
-    //	 $("input[name='id[]']").each(function(){
-    //	  if (this.checked==true) {
-    //		Checkbox=true;
-    //	  }
-    //	});
-    //	if (Checkbox){
-    //
-    //
-    //		$("#listform").submit();
-    //	}
-    //	else{
-    //		alert("请选择要操作的内容!");
-    //
-    //		return false;
-    //	}
-    //}
-    //
-    ////批量置顶
-    //function changeistop(o){
-    //	var Checkbox=false;
-    //	 $("input[name='id[]']").each(function(){
-    //	  if (this.checked==true) {
-    //		Checkbox=true;
-    //	  }
-    //	});
-    //	if (Checkbox){
-    //
-    //		$("#listform").submit();
-    //	}
-    //	else{
-    //		alert("请选择要操作的内容!");
-    //
-    //		return false;
-    //	}
-    //}
-    //
-    //
-    ////批量移动
-    //function changecate(o){
-    //	var Checkbox=false;
-    //	 $("input[name='id[]']").each(function(){
-    //	  if (this.checked==true) {
-    //		Checkbox=true;
-    //	  }
-    //	});
-    //	if (Checkbox){
-    //
-    //		$("#listform").submit();
-    //	}
-    //	else{
-    //		alert("请选择要操作的内容!");
-    //
-    //		return false;
-    //	}
-    //}
-    //
-    ////批量复制
-    //function changecopy(o){
-    //	var Checkbox=false;
-    //	 $("input[name='id[]']").each(function(){
-    //	  if (this.checked==true) {
-    //		Checkbox=true;
-    //	  }
-    //	});
-    //	if (Checkbox){
-    //		var i = 0;
-    //	    $("input[name='id[]']").each(function(){
-    //	  		if (this.checked==true) {
-    //				i++;
-    //			}
-    //	    });
-    //		if(i>1){
-    //	    	alert("只能选择一条信息!");
-    //			$(o).find("option:first").prop("selected","selected");
-    //		}else{
-    //
-    //			$("#listform").submit();
-    //		}
-    //	}
-    //	else{
-    //		alert("请选择要复制的内容!");
-    //		$(o).find("option:first").prop("selected","selected");
-    //		return false;
-    //	}
-    //}
-
-</script>
 </body>
 </html>

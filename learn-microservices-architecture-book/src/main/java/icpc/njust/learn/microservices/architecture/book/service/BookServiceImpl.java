@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
@@ -23,7 +24,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void createbook(Book book) {
-        bookDao.save(book);
+        book = bookDao.saveAndFlush(book);
+        System.out.print(book.getId());
+        //bookDao.save(book);
     }
 
     @Override
@@ -32,8 +35,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public void deletebook(String id) {
-        bookDao.deleteById(id);
+        id=id.substring(1,id.length()-1);
+        Optional<Book> optionalBook= bookDao.findById(id);
+        Book book = optionalBook.get();
+        System.out.println("hehehehe "+id);
+        bookDao.delete(book);
     }
 
     @Override
